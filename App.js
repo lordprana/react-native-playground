@@ -1,13 +1,19 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import {StyleSheet} from 'react-native'
+import {createNavigationContainerRef} from '@react-navigation/native'
+import {Provider} from 'react-redux'
+import NavigationContainer from '@react-navigation/native/lib/module/NavigationContainer'
+import store from './reducers/store'
+import SplashRedirectNavigator from './navigators/SplashRedirectNavigator'
 
-export default function App() {
+const App = () => {
+  const navigationRef = createNavigationContainerRef()
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <Provider store={store}>
+      <NavigationContainer ref={navigationRef}>
+        <SplashRedirectNavigator/>
+      </NavigationContainer>
+    </Provider>
+  )
 }
 
 const styles = StyleSheet.create({
@@ -16,5 +22,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-});
+    width: '100%'
+  }
+})
+
+export default App
